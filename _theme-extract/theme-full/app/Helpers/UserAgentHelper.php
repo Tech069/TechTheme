@@ -1,0 +1,1 @@
+<?php\n\nnamespace Pterodactyl\\Helpers;\n\nuse Illuminate\Support\Facades\Log;\n\nclass UserAgentHelper\n{\n    public function __construct()\n    {\n        // VexyThemes - TODO: implement\n    }\n}\n

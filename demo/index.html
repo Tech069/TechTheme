@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avtix Game Panel — VexyThemes Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --hyper-primary: #df3050;
+            --hyper-primary-hover: #e44b63;
+            --hyper-secondary: #27272a;
+            --hyper-accent: #292524;
+            --hyper-background: #0c0a09;
+            --hyper-card: #191919cc;
+            --hyper-surface: #1c19177a;
+            --hyper-glass: #87878746;
+            --hyper-text-primary: #ffffff;
+            --hyper-text-secondary: #fafafa;
+            --hyper-text-foreground: #f2f2f2;
+            --hyper-text-muted: #a1a1aa;
+            --hyper-border-default: #27272a;
+            --hyper-border-strong: #df3050;
+            --hyper-border-subtle: #292524;
+            --hyper-primary-rgb: 223, 48, 80;
+            --hyper-background-rgb: 12, 10, 9;
+            --hyper-white-rgb: 255, 255, 255;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body,html,*{font-family:'Poppins',sans-serif !important}
+        body{background:var(--hyper-background);color:var(--hyper-text-primary);min-height:100vh;overflow-x:hidden}
+        ::-webkit-scrollbar{width:2px}::-webkit-scrollbar-thumb{background:var(--hyper-primary);border-radius:9999px}::-webkit-scrollbar-track{background:transparent}
+
+        /* === LANDING === */
+        .landing{min-height:100vh}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(18px) saturate(1.05);background:rgba(12,10,9,.76);border-bottom:1px solid rgba(255,255,255,.06)}
+        .nav-brand{display:flex;align-items:center;gap:12px}
+        .nav-icon{width:34px;height:34px;border-radius:10px;background:var(--hyper-primary);display:flex;align-items:center;justify-content:center}
+        .nav-icon svg{width:18px;height:18px;fill:#fff}
+        .nav-logo{font-size:17px;font-weight:800;letter-spacing:-.01em;color:var(--hyper-text-primary)}
+        .nav-links{display:flex;gap:28px;align-items:center}
+        .nav-links a{color:var(--hyper-text-muted);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s}
+        .nav-links a:hover{color:var(--hyper-text-primary)}
+        .btn-nav{padding:9px 22px;border-radius:10px;background:var(--hyper-primary);color:#fff;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:all .2s;box-shadow:inset 0 2px 0 rgba(255,255,255,.3)}
+        .btn-nav:hover{background:var(--hyper-primary-hover);transform:translateY(-1px)}
+
+        .hero{padding:150px 40px 80px;text-align:center;position:relative}
+        .hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(var(--hyper-primary-rgb),.1) 0%,transparent 70%);pointer-events:none}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:9999px;background:rgba(var(--hyper-primary-rgb),.1);border:1px solid rgba(var(--hyper-primary-rgb),.2);color:var(--hyper-primary);font-size:12px;font-weight:600;margin-bottom:24px}
+        .hero h1{font-size:56px;font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px}
+        .hero h1 span{color:var(--hyper-primary)}
+        .hero p{font-size:16px;color:var(--hyper-text-muted);max-width:500px;margin:0 auto 36px;line-height:1.6}
+        .hero-btns{display:flex;gap:14px;justify-content:center}
+        .btn-primary{padding:13px 30px;border-radius:10px;background:var(--hyper-primary);color:#fff;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .2s;box-shadow:inset 0 2px 0 rgba(255,255,255,.3)}
+        .btn-primary:hover{background:var(--hyper-primary-hover);transform:translateY(-2px);box-shadow:inset 0 2px 0 rgba(255,255,255,.3),0 12px 30px -8px rgba(var(--hyper-primary-rgb),.4)}
+        .btn-secondary{padding:13px 30px;border-radius:10px;background:var(--hyper-card);color:var(--hyper-text-primary);font-size:14px;font-weight:600;border:1px solid var(--hyper-border-default);cursor:pointer;transition:all .2s;backdrop-filter:blur(16px)}
+        .btn-secondary:hover{border-color:var(--hyper-border-strong);background:rgba(25,25,25,.9)}
+
+        .features{padding:60px 40px;max-width:1000px;margin:0 auto}
+        .features h2{text-align:center;font-size:32px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+        .features .sub{text-align:center;color:var(--hyper-text-muted);font-size:14px;margin-bottom:50px}
+        .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .feature-card{background:var(--hyper-card);border:1px solid var(--hyper-border-default);border-radius:14px;padding:24px;backdrop-filter:blur(16px);transition:all .3s}
+        .feature-card:hover{border-color:var(--hyper-border-strong);transform:translateY(-3px);box-shadow:0 12px 40px -12px rgba(0,0,0,.5)}
+        .fi{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;background:rgba(var(--hyper-primary-rgb),.1)}
+        .feature-card h3{font-size:14px;font-weight:700;margin-bottom:6px}
+        .feature-card p{font-size:12px;color:var(--hyper-text-muted);line-height:1.5}
+
+        .preview{padding:40px;max-width:1000px;margin:0 auto}
+        .preview-frame{background:var(--hyper-card);border:1px solid var(--hyper-border-default);border-radius:14px;overflow:hidden;backdrop-filter:blur(16px);box-shadow:0 20px 60px -20px rgba(0,0,0,.6)}
+        .preview-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.05)}
+        .preview-dot{width:10px;height:10px;border-radius:50%}.rd{background:#ef4444}.ry{background:#f59e0b}.rg{background:#22c55e}
+        .preview-url{flex:1;margin-left:10px;padding:5px 12px;border-radius:6px;background:rgba(255,255,255,.05);color:var(--hyper-text-muted);font-size:11px;font-family:monospace}
+        .preview-content{min-height:450px;position:relative}
+
+        /* === AUTH PAGE (exact Avtix) === */
+        .auth-demo{display:flex;align-items:center;justify-content:center;min-height:450px;background:var(--hyper-background);position:relative}
+        .auth-demo::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(var(--hyper-primary-rgb),.06) 0%,transparent 60%)}
+        .auth-box{position:relative;z-index:1;width:100%;max-width:400px;padding:20px}
+        .auth-logo{width:48px;height:48px;border-radius:14px;background:var(--hyper-primary);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px -8px rgba(var(--hyper-primary-rgb),.4)}
+        .auth-logo svg{width:24px;height:24px;fill:#fff}
+        .auth-title{font-size:20px;font-weight:800;text-align:center;margin-bottom:4px}
+        .auth-sub{font-size:12px;color:var(--hyper-text-muted);text-align:center;margin-bottom:28px}
+        .auth-field{margin-bottom:16px}
+        .auth-field label{display:block;font-size:11px;font-weight:600;color:var(--hyper-text-muted);margin-bottom:6px}
+        .auth-field input{width:100%;padding:11px 14px;background:rgba(255,255,255,.04);border:1px solid var(--hyper-border-default);border-radius:10px;color:var(--hyper-text-primary);font-size:13px;font-family:inherit;outline:none;transition:all .2s}
+        .auth-field input:focus{border-color:var(--hyper-primary);box-shadow:0 0 0 3px rgba(var(--hyper-primary-rgb),.15)}
+        .auth-field input::placeholder{color:rgba(255,255,255,.2)}
+        .auth-btn{width:100%;padding:11px;border:none;border-radius:10px;background:var(--hyper-primary);color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;box-shadow:inset 0 2px 0 rgba(255,255,255,.3);font-family:inherit}
+        .auth-btn:hover{background:var(--hyper-primary-hover)}
+        .auth-footer{text-align:center;margin-top:20px;font-size:11px;color:rgba(255,255,255,.25)}
+        .auth-forgot{display:block;text-align:center;margin-top:12px;font-size:12px;color:var(--hyper-text-muted);text-decoration:none}
+        .auth-forgot:hover{color:var(--hyper-primary)}
+
+        /* === DASHBOARD (exact Avtix) === */
+        .dash-demo{display:flex;min-height:450px}
+        .dash-sidebar{width:72px;background:var(--hyper-card);border-right:1px solid var(--hyper-border-default);display:flex;flex-direction:column;align-items:center;padding:16px 0;gap:6px;backdrop-filter:blur(16px);flex-shrink:0}
+        .sb-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--hyper-text-muted);cursor:pointer;transition:all .15s;font-size:16px}
+        .sb-icon:hover{background:rgba(255,255,255,.05);color:var(--hyper-text-primary)}
+        .sb-icon.active{background:var(--hyper-accent);color:var(--hyper-primary)}
+        .sb-sep{width:32px;height:1px;background:var(--hyper-border-default);margin:4px 0}
+        .sb-bottom{margin-top:auto}
+        .sb-avatar{width:32px;height:32px;border-radius:8px;background:var(--hyper-primary);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;cursor:pointer}
+
+        .dash-main{flex:1;padding:20px 24px;overflow-y:auto}
+        .dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+        .dash-header h2{font-size:18px;font-weight:700}
+        .dash-header-right{display:flex;align-items:center;gap:12px}
+        .dash-search{padding:8px 14px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--hyper-border-default);color:var(--hyper-text-primary);font-size:12px;font-family:inherit;outline:none;width:200px}
+        .dash-search:focus{border-color:var(--hyper-primary)}
+        .dash-search::placeholder{color:rgba(255,255,255,.2)}
+
+        .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+        .stat-card{background:var(--hyper-card);border:1px solid var(--hyper-border-default);border-radius:12px;padding:16px;backdrop-filter:blur(16px)}
+        .stat-label{font-size:11px;color:var(--hyper-text-muted);font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+        .stat-val{font-size:24px;font-weight:800;margin-top:4px;letter-spacing:-.02em}
+        .sv-1{color:var(--hyper-primary)}.sv-2{color:#fbbf24}.sv-3{color:#4ade80}.sv-4{color:#f87171}
+
+        .server-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+        .srv-card{background:var(--hyper-card);border:1px solid var(--hyper-border-default);border-radius:12px;padding:14px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(16px);transition:all .15s;cursor:pointer}
+        .srv-card:hover{border-color:rgba(255,255,255,.1);background:rgba(25,25,25,.9)}
+        .srv-left{display:flex;align-items:center;gap:10px}
+        .srv-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px}
+        .srv-mc{background:rgba(34,197,94,.1)}.srv-dc{background:rgba(88,101,242,.1)}.srv-web{background:rgba(245,158,11,.1)}.srv-ts{background:rgba(45,141,229,.1)}.srv-db{background:rgba(168,85,247,.1)}.srv-files{background:rgba(236,72,153,.1)}
+        .srv-name{font-size:12px;font-weight:600}.srv-node{font-size:10px;color:var(--hyper-text-muted)}
+        .srv-status{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500}
+        .st-dot{width:6px;height:6px;border-radius:50%}.st-on{background:#22c55e;box-shadow:0 0 6px rgba(34,197,94,.4)}.st-off{background:#ef4444}.st-st{background:#f59e0b}
+
+        .footer-demo{padding:30px;text-align:center;color:rgba(255,255,255,.2);font-size:11px;border-top:1px solid var(--hyper-border-default);margin-top:30px}
+        .footer-demo a{color:var(--hyper-primary);text-decoration:none}
+
+        @media(max-width:768px){
+            .hero h1{font-size:32px}.feature-grid,.stat-grid{grid-template-columns:1fr}.server-grid{grid-template-columns:1fr}
+            .nav{padding:10px 16px}.hero{padding:100px 16px 40px}.features{padding:30px 16px}.dash-sidebar{display:none}
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-brand">
+        <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z"/></svg></div>
+        <div class="nav-logo">Avtix Game Panel</div>
+    </div>
+    <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#preview">Preview</a>
+        <a href="https://discord.gg/YOUR_DISCORD" target="_blank">Discord</a>
+        <button class="btn-nav" onclick="document.getElementById('preview').scrollIntoView({behavior:'smooth'})">Try Demo</button>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-badge">⚡ Premium Pterodactyl Theme</div>
+    <h1>Avtix <span>Game Panel</span></h1>
+    <p>Dark glassmorphism theme for Pterodactyl. One-click install. License system built in. ₹2,000 only.</p>
+    <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('preview').scrollIntoView({behavior:'smooth'})">Live Demo</button>
+        <button class="btn-secondary" onclick="window.open('https://discord.gg/YOUR_DISCORD','_blank')">Get Started</button>
+    </div>
+</div>
+
+<div class="features" id="features">
+    <h2>Why Avtix?</h2>
+    <p class="sub">Built for speed, designed for style</p>
+    <div class="feature-grid">
+        <div class="feature-card"><div class="fi">🎨</div><h3>Dark Glassmorphism</h3><p>Frosted glass cards with crimson red accents and blur effects.</p></div>
+        <div class="feature-card"><div class="fi">⚡</div><h3>One-Line Install</h3><p>Single command on any VPS. Handles PHP, MySQL, Redis, SSL — everything.</p></div>
+        <div class="feature-card"><div class="fi">🔑</div><h3>Built-in License</h3><p>Key system with admin dashboard. Track activations, revoke keys.</p></div>
+        <div class="feature-card"><div class="fi">📱</div><h3>Fully Responsive</h3><p>Looks perfect on desktop, tablet, and mobile devices.</p></div>
+        <div class="feature-card"><div class="fi">🛡️</div><h3>Encrypted & Secure</h3><p>HMAC verification, anti-debug, integrity checks. Code protected.</p></div>
+        <div class="feature-card"><div class="fi">🔌</div><h3>Addon Ready</h3><p>Billing, Discord, DDoS alerts, node monitoring — all built in.</p></div>
+    </div>
+</div>
+
+<div class="preview" id="preview">
+    <div class="preview-frame">
+        <div class="preview-bar">
+            <div class="preview-dot rd"></div><div class="preview-dot ry"></div><div class="preview-dot rg"></div>
+            <div class="preview-url">https://panel.yourdomain.com</div>
+        </div>
+        <div class="preview-content">
+            <div id="view-auth" class="auth-demo">
+                <div class="auth-box">
+                    <div class="auth-logo"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z"/></svg></div>
+                    <div class="auth-title">Avtix Game Panel</div>
+                    <div class="auth-sub">Sign in to continue to your panel</div>
+                    <div class="auth-field"><label>Username or Email</label><input type="text" placeholder="admin@example.com" value="admin@demo.com"></div>
+                    <div class="auth-field"><label>Password</label><input type="password" placeholder="••••••••" value="••••••••" id="pass"></div>
+                    <button class="auth-btn" onclick="showDash()">Authenticate</button>
+                    <a class="auth-forgot" href="#">Forgot password?</a>
+                    <div class="auth-footer">Powered by Avtix Game Panel</div>
+                </div>
+            </div>
+
+            <div id="view-dash" class="dash-demo" style="display:none">
+                <div class="dash-sidebar">
+                    <div class="sb-icon active" title="Dashboard">🏠</div>
+                    <div class="sb-icon" title="Servers">🖥️</div>
+                    <div class="sb-icon" title="Account">👤</div>
+                    <div class="sb-sep"></div>
+                    <div class="sb-icon" title="Files">📁</div>
+                    <div class="sb-icon" title="Databases">🗄️</div>
+                    <div class="sb-icon" title="Schedules">⏰</div>
+                    <div class="sb-icon" title="Users">👥</div>
+                    <div class="sb-bottom">
+                        <div class="sb-avatar">A</div>
+                    </div>
+                </div>
+                <div class="dash-main">
+                    <div class="dash-header">
+                        <h2>Dashboard</h2>
+                        <div class="dash-header-right">
+                            <input class="dash-search" placeholder="Search servers..." type="text">
+                        </div>
+                    </div>
+                    <div class="stat-grid">
+                        <div class="stat-card"><div class="stat-label">Total Servers</div><div class="stat-val sv-1">12</div></div>
+                        <div class="stat-card"><div class="stat-label">Online</div><div class="stat-val sv-2">9</div></div>
+                        <div class="stat-card"><div class="stat-label">Users</div><div class="stat-val sv-3">84</div></div>
+                        <div class="stat-card"><div class="stat-label">Offline</div><div class="stat-val sv-4">3</div></div>
+                    </div>
+                    <div class="server-grid">
+                        <div class="srv-card"><div class="srv-left"><div class="srv-icon srv-mc">🎮</div><div><div class="srv-name">Survival SMP</div><div class="srv-node">Node 1 · 4GB</div></div></div><div class="srv-status"><div class="st-dot st-on"></div>Running</div></div>
+                        <div class="srv-card"><div class="srv-left"><div class="srv-icon srv-dc">💬</div><div><div class="srv-name">Discord Bot</div><div class="srv-node">Node 2 · 2GB</div></div></div><div class="srv-status"><div class="st-dot st-on"></div>Running</div></div>
+                        <div class="srv-card"><div class="srv-left"><div class="srv-icon srv-web">🌐</div><div><div class="srv-name">Web Server</div><div class="srv-node">Node 1 · 8GB</div></div></div><div class="srv-status"><div class="st-dot st-on"></div>Running</div></div>
+                        <div class="srv-card"><div class="srv-left"><div class="srv-icon srv-ts">🔊</div><div><div class="srv-name">TeamSpeak</div><div class="srv-node">Node 3 · 1GB</div></div></div><div class="srv-status"><div class="st-dot st-st"></div>Stopped</div></div>
+                        <div class="srv-card"><div class="srv-left"><div class="srv-icon srv-db">🗄️</div><div><div class="srv-name">MongoDB</div><div class="srv-node">Node 2 · 4GB</div></div></div><div class="srv-status"><div class="st-dot st-on"></div>Running</div></div>
+                        <div class="srv-card"><div class="srv-left"><div class="srv-icon srv-files">📁</div><div><div class="srv-name">FTP Server</div><div class="srv-node">Node 1 · 1GB</div></div></div><div class="srv-status"><div class="st-dot st-off"></div>Offline</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer-demo">
+    <p>Avtix Game Panel — VexyThemes • <a href="https://discord.gg/YOUR_DISCORD">Discord</a> • ₹2,000</p>
+</div>
+
+<script>
+function showDash(){document.getElementById('view-auth').style.display='none';document.getElementById('view-dash').style.display='flex'}
+document.getElementById('pass').addEventListener('focus',function(){this.value=''});
+document.getElementById('pass').addEventListener('blur',function(){if(!this.value)this.value='••••••••'});
+</script>
+</body>
+</html>

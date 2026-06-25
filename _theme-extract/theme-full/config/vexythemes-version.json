@@ -1,0 +1,13 @@
+{
+  "version": "3.0.0",
+  "released": "2026-06-20",
+  "channel": "stable",
+  "min_php": "8.2",
+  "changelog": "Initial release of VexyThemes with full DGEN features",
+  "download_url": "",
+  "checksum": "",
+  "requirements": {
+    "pterodactyl": ">=1.11.0",
+    "php": ">=8.2"
+  }
+}

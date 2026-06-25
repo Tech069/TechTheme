@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VexyThemes — Admin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#09090b;color:#fafafa;min-height:100vh;overflow-x:hidden}
+        ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#18181b}::-webkit-scrollbar-thumb{background:#27272a;border-radius:3px}
+        ::-webkit-scrollbar-thumb:hover{background:#3f3f46}
+
+        .login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;background:radial-gradient(ellipse at 50% 0%,rgba(99,102,241,.12) 0%,transparent 60%)}
+        .login-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:48px 40px;max-width:400px;width:100%;backdrop-filter:blur(20px)}
+        .logo{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);margin:0 auto 24px;box-shadow:0 0 40px -8px rgba(99,102,241,.5);display:flex;align-items:center;justify-content:center}
+        .logo svg{width:24px;height:24px;fill:#fff}
+        h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:4px;letter-spacing:-.02em}
+        h1 span{background:linear-gradient(135deg,#6366f1,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .subtitle{text-align:center;color:#52525b;font-size:13px;margin-bottom:32px}
+        label{display:block;font-size:12px;font-weight:500;color:#71717a;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+        input{width:100%;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#fafafa;font-size:14px;font-family:inherit;outline:none;margin-bottom:20px;transition:all .2s}
+        input:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+        input::placeholder{color:#3f3f46}
+        button{width:100%;padding:12px;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+        .btn{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;box-shadow:0 4px 15px -3px rgba(99,102,241,.4)}
+        .btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px -3px rgba(99,102,241,.5)}
+        .btn:active{transform:translateY(0)}
+        .error{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);border-radius:12px;padding:12px 16px;color:#fca5a5;font-size:13px;margin-bottom:20px;display:none}
+
+        .dash{max-width:900px;margin:0 auto;padding:32px 24px;background:radial-gradient(ellipse at 20% 0%,rgba(99,102,241,.06) 0%,transparent 50%),radial-gradient(ellipse at 80% 100%,rgba(139,92,246,.04) 0%,transparent 50%)}
+        .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.06)}
+        .brand{display:flex;align-items:center;gap:14px}
+        .brand-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;box-shadow:0 0 25px -5px rgba(99,102,241,.4);position:relative}
+        .brand-icon::after{content:'';position:absolute;inset:-2px;border-radius:14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);opacity:.25;filter:blur(8px);z-index:-1}
+        .brand-icon svg{width:20px;height:20px;fill:#fff}
+        .brand-text h2{font-size:18px;font-weight:700;letter-spacing:-.01em}
+        .brand-text p{font-size:12px;color:#52525b}
+        .logout-btn{background:rgba(255,255,255,.04);color:#a1a1aa;border:1px solid rgba(255,255,255,.08);padding:8px 18px;border-radius:10px;font-size:13px;cursor:pointer;font-family:inherit;font-weight:500;transition:all .2s}
+        .logout-btn:hover{background:rgba(239,68,68,.08);color:#fca5a5;border-color:rgba(239,68,68,.2)}
+
+        .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+        .stat{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+        .stat:hover{transform:translateY(-2px);box-shadow:0 8px 25px -8px rgba(0,0,0,.4)}
+        .stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:16px 16px 0 0}
+        .stat:nth-child(1)::before{background:linear-gradient(90deg,#6366f1,#818cf8)}
+        .stat:nth-child(2)::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+        .stat:nth-child(3)::before{background:linear-gradient(90deg,#22c55e,#4ade80)}
+        .stat:nth-child(4)::before{background:linear-gradient(90deg,#ef4444,#f87171)}
+        .stat-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#52525b;font-weight:600}
+        .stat-value{font-size:32px;font-weight:800;margin-top:8px;letter-spacing:-.02em}
+        .stat:nth-child(1) .stat-value{color:#818cf8}
+        .stat:nth-child(2) .stat-value{color:#fbbf24}
+        .stat:nth-child(3) .stat-value{color:#4ade80}
+        .stat:nth-child(4) .stat-value{color:#f87171}
+
+        .card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;margin-bottom:20px;position:relative;overflow:hidden}
+        .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(99,102,241,.3),rgba(139,92,246,.3),transparent)}
+        .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+        .card-header h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+        .card-header .count{font-size:12px;color:#52525b;background:rgba(255,255,255,.05);padding:4px 10px;border-radius:20px}
+
+        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        .form-grid .full{grid-column:1/-1}
+        .create-btn{margin-top:4px}
+
+        .license-list{display:flex;flex-direction:column;gap:2px}
+        .license-item{display:grid;grid-template-columns:1fr auto;align-items:center;padding:14px 16px;border-radius:12px;transition:background .15s;gap:12px}
+        .license-item:hover{background:rgba(255,255,255,.03)}
+        .license-left{display:flex;align-items:center;gap:12px;min-width:0;flex-wrap:wrap}
+        .license-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+        .key-text{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:#c4b5fd;background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(139,92,246,.1));padding:5px 12px;border-radius:8px;cursor:pointer;transition:all .15s;white-space:nowrap;border:1px solid rgba(99,102,241,.15)}
+        .key-text:hover{background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(139,92,246,.2));border-color:rgba(99,102,241,.3);transform:scale(1.02)}
+        .owner-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:8px;background:rgba(251,191,36,.1);color:#fbbf24;border:1px solid rgba(251,191,36,.15);white-space:nowrap}
+        .owner-empty{font-size:11px;color:#3f3f46;font-style:italic}
+        .ip-badge{font-family:'JetBrains Mono',monospace;font-size:11px;color:#52525b;background:rgba(255,255,255,.03);padding:3px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.05);white-space:nowrap}
+        .expiry-text{font-size:11px;color:#52525b;white-space:nowrap}
+        .expiry-text.warning{color:#fbbf24}
+        .expiry-text.expired{color:#f87171}
+        .expiry-text.permanent{color:#3f3f46}
+        .badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:8px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+        .badge-unused{background:rgba(99,102,241,.1);color:#818cf8;border:1px solid rgba(99,102,241,.15)}
+        .badge-active{background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.15);box-shadow:0 0 12px -3px rgba(34,197,94,.2)}
+        .badge-revoked{background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.15)}
+        .action-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;border-radius:8px;cursor:pointer;transition:all .15s;background:rgba(255,255,255,.04);color:#71717a}
+        .action-btn:hover{background:rgba(239,68,68,.1);color:#f87171}
+        .action-btn.unrevoke{color:#4ade80}
+        .action-btn.unrevoke:hover{background:rgba(34,197,94,.12);color:#22c55e}
+        .action-btn.delete{color:#f87171}
+        .action-btn.delete:hover{background:rgba(239,68,68,.12);color:#ef4444}
+        .action-btn.copy{color:#818cf8}
+        .action-btn.copy:hover{background:rgba(99,102,241,.1)}
+        .action-btn.copied{color:#4ade80}
+
+        .empty-state{text-align:center;padding:48px 20px;color:#3f3f46}
+        .empty-icon{width:48px;height:48px;margin:0 auto 16px;border-radius:14px;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:20px}
+        .empty-state p{font-size:14px;margin-top:4px}
+
+        .hidden{display:none!important}
+        .toast{position:fixed;bottom:24px;right:24px;background:#18181b;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 20px;font-size:13px;color:#fafafa;z-index:999;transform:translateY(100px);opacity:0;transition:all .3s ease;box-shadow:0 8px 30px -5px rgba(0,0,0,.5)}
+        .toast.show{transform:translateY(0);opacity:1}
+
+        @media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}.license-item{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+    <div id="loginView" class="login-wrap">
+        <div class="login-card">
+            <div class="logo"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z"/></svg></div>
+            <h1>Vexy<span>Themes</span></h1>
+            <p class="subtitle">License Management Panel</p>
+            <div id="loginError" class="error"></div>
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Enter username" autocomplete="username">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter password" autocomplete="current-password">
+            <button class="btn" onclick="login()">Sign in</button>
+        </div>
+    </div>
+
+    <div id="dashView" class="dash hidden">
+        <div class="header">
+            <div class="brand">
+                <div class="brand-icon"><svg viewBox="0 0 24 24"><path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z"/></svg></div>
+                <div class="brand-text">
+                    <h2>Vexy<span style="background:linear-gradient(135deg,#6366f1,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Themes</span></h2>
+                    <p>License Dashboard</p>
+                </div>
+            </div>
+            <button class="logout-btn" onclick="logout()">Sign out</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat"><div class="stat-label">Total Keys</div><div class="stat-value" id="statTotal">0</div></div>
+            <div class="stat"><div class="stat-label">Available</div><div class="stat-value" id="statActive">0</div></div>
+            <div class="stat"><div class="stat-label">Active</div><div class="stat-value" id="statAssigned">0</div></div>
+            <div class="stat"><div class="stat-label">Revoked</div><div class="stat-value" id="statRevoked">0</div></div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Create License</h3>
+            </div>
+            <div class="form-grid">
+                <div>
+                    <label>Owner</label>
+                    <input type="text" id="ownerTag" placeholder="Customer name or ID">
+                </div>
+                <div>
+                    <label>Expiry</label>
+                    <input type="date" id="expiryDate" disabled>
+                </div>
+                <div class="full" style="display:flex;align-items:center;gap:12px;margin-top:-4px">
+                    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin:0;text-transform:none;letter-spacing:0;font-size:14px;color:#e4e4e7;font-weight:500">
+                        <input type="checkbox" id="noExpiry" checked style="width:20px;height:20px;margin:0;accent-color:#6366f1">
+                        Permanent key (no expiry)
+                    </label>
+                </div>
+                <div class="full">
+                    <button class="btn create-btn" onclick="createLicense()">Generate Key</button>
+                </div>
+            </div>
+            <div id="newKey" style="display:none;margin-top:16px;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.15);border-radius:12px;padding:16px">
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                    <div>
+                        <div style="font-size:11px;color:#4ade80;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">License Key Generated</div>
+                        <code id="newKeyValue" style="font-family:'JetBrains Mono',monospace;font-size:15px;color:#fafafa"></code>
+                    </div>
+                    <button class="action-btn copy" onclick="copyGenerated()" title="Copy key"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>License Keys</h3>
+                <span class="count" id="keyCount">0 keys</span>
+            </div>
+            <div id="licenseList"><div class="empty-state"><div class="empty-icon">🔑</div><p>No licenses yet</p><p style="font-size:12px;color:#27272a;margin-top:4px">Create one above to get started</p></div></div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+<script>
+// === VexyThemes Security Layer ===
+(function(){
+    // Anti-debug: detect devtools
+    var _devtools = {open: false};
+    var _threshold = 170;
+    setInterval(function(){
+        var widthThreshold = window.outerWidth - window.innerWidth > _threshold;
+        var heightThreshold = window.outerHeight - window.innerHeight > _threshold;
+        if(widthThreshold || heightThreshold){
+            if(!_devtools.open){_devtools.open = true;}
+        } else {
+            _devtools.open = false;
+        }
+    }, 1000);
+    // Console protection
+    var _origConsole = console;
+    Object.defineProperty(window, 'console', {
+        get: function(){
+            if(_devtools.open) return _origConsole;
+            return {log:function(){},warn:function(){},error:function(){},info:function(){},clear:function(){},table:function(){}};
+        }
+    });
+    // Debugger trap (gentle)
+    // /./.constructor('debugger')();
+})();
+
+// === Encoded Constants ===
+var _ak = [118,101,114,99,101,108,45,97,112,105]; // "vercel-api" part
+var _bd = [46,97,112,112]; // ".app"
+const API = window.location.origin + '/api/index';
+let session = localStorage.getItem('vxt_s');
+
+document.getElementById('noExpiry').addEventListener('change', function() {
+    document.getElementById('expiryDate').disabled = this.checked;
+    if (this.checked) document.getElementById('expiryDate').value = '';
+});
+document.getElementById('expiryDate').min = new Date().toISOString().split('T')[0];
+
+async function api(endpoint, body) {
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...body, _endpoint: endpoint }),
+    });
+    return res.json();
+}
+
+function show(el) { document.getElementById(el).classList.remove('hidden'); }
+function hide(el) { document.getElementById(el).classList.add('hidden'); }
+function escHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+async function login() {
+    const u = document.getElementById('username').value.trim();
+    const p = document.getElementById('password').value;
+    if (!u || !p) return;
+    const data = await api('/auth', { action: 'login', username: u, password: p });
+    if (data.success) {
+        session = data.session;
+        localStorage.setItem('vxt_s', session);
+        loadDashboard();
+    } else {
+        const e = document.getElementById('loginError');
+        e.textContent = data.error || 'Login failed';
+        e.style.display = 'block';
+    }
+}
+
+function logout() {
+    session = null;
+    localStorage.removeItem('vxt_s');
+    hide('dashView');
+    show('loginView');
+}
+
+function timeAgo(date) {
+    const diff = new Date(date) - new Date();
+    if (diff <= 0) return { text: 'Expired', cls: 'expired' };
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    let str = '';
+    if (days > 365) { const y = Math.floor(days / 365); str = y + 'y ' + (days % 365) + 'd'; }
+    else if (days > 30) { const m = Math.floor(days / 30); str = m + 'mo ' + (days % 30) + 'd'; }
+    else if (days > 0) str = days + 'd ' + hours + 'h';
+    else str = hours + 'h';
+    const cls = days < 30 ? 'warning' : '';
+    return { text: str, cls };
+}
+
+async function loadDashboard() {
+    if (!session) { show('loginView'); return; }
+    hide('loginView');
+    show('dashView');
+
+    const list = await api('/admin', { action: 'list_licenses', session });
+
+    const stats = list.stats || {};
+    document.getElementById('statTotal').textContent = stats.total || 0;
+    document.getElementById('statActive').textContent = stats.active || 0;
+    document.getElementById('statAssigned').textContent = stats.assigned || 0;
+    document.getElementById('statRevoked').textContent = stats.revoked || 0;
+
+    // Render licenses
+    const el = document.getElementById('licenseList');
+    const count = document.getElementById('keyCount');
+    if (!list.licenses || list.licenses.length === 0) {
+        el.innerHTML = '<div class="empty-state"><div class="empty-icon">🔑</div><p>No licenses yet</p><p style="font-size:12px;color:#27272a;margin-top:4px">Create one above to get started</p></div>';
+        count.textContent = '0 keys';
+        return;
+    }
+    count.textContent = list.licenses.length + ' key' + (list.licenses.length !== 1 ? 's' : '');
+
+    el.innerHTML = '<div class="license-list">' + list.licenses.map(l => {
+        const masked = l.key.substring(0, 5) + '••••-••••-••••-••••';
+        let badge = '<span class="badge badge-unused">Unused</span>';
+        if (l.revoked) badge = '<span class="badge badge-revoked">Revoked</span>';
+        else if (l.activated_ip) badge = '<span class="badge badge-active">Active</span>';
+
+        let expiryHtml = '<span class="expiry-text permanent">Permanent</span>';
+        if (l.expires) {
+            const t = timeAgo(l.expires);
+            expiryHtml = '<span class="expiry-text ' + t.cls + '">' + new Date(l.expires).toLocaleDateString() + ' · ' + t.text + '</span>';
+        }
+
+        const tag = l.tag ? '<span class="owner-tag">' + escHtml(l.tag) + '</span>' : '<span class="owner-empty">No owner</span>';
+        const ip = l.activated_ip ? '<span class="ip-badge">' + l.activated_ip + '</span>' : '';
+
+        return '<div class="license-item">' +
+            '<div class="license-left">' +
+                '<span class="key-text" onclick="copyKey(\'' + l.key + '\',this)" title="Click to copy">' + masked + '</span>' +
+                badge + tag + ip +
+            '</div>' +
+            '<div class="license-right">' +
+                expiryHtml +
+                (l.revoked ? '<button class="action-btn unrevoke" onclick="unrevokeLicense(\'' + l.key + '\')" title="Unrevoke"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></button>' : '<button class="action-btn" onclick="revokeLicense(\'' + l.key + '\')" title="Revoke"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></button>') +
+                '<button class="action-btn delete" onclick="deleteLicense(\'' + l.key + '\')" title="Delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></button>' +
+            '</div></div>';
+    }).join('') + '</div>';
+}
+
+async function createLicense() {
+    const noExpiry = document.getElementById('noExpiry').checked;
+    const expires = noExpiry ? null : document.getElementById('expiryDate').value || null;
+    const tag = document.getElementById('ownerTag').value.trim() || null;
+    const data = await api('/admin', { action: 'create_license', session, expires, tag });
+    if (data.success) {
+        document.getElementById('newKeyValue').textContent = data.key;
+        document.getElementById('newKey').style.display = 'block';
+        document.getElementById('ownerTag').value = '';
+        document.getElementById('expiryDate').value = '';
+        showToast('License key created');
+        loadDashboard();
+    }
+}
+
+async function revokeLicense(key) {
+    if (!confirm('Revoke this license? The panel using it will stop working.')) return;
+    await api('/admin', { action: 'revoke_license', session, key });
+    showToast('License revoked');
+    loadDashboard();
+}
+
+async function unrevokeLicense(key) {
+    await api('/admin', { action: 'unrevoke_license', session, key });
+    showToast('License restored');
+    loadDashboard();
+}
+
+async function deleteLicense(key) {
+    if (!confirm('Permanently delete this license? This cannot be undone.')) return;
+    await api('/admin', { action: 'delete_license', session, key });
+    showToast('License deleted');
+    loadDashboard();
+}
+
+function copyKey(key, el) {
+    navigator.clipboard.writeText(key);
+    if (el) { el.style.background = 'rgba(74,222,128,.15)'; setTimeout(() => el.style.background = '', 1000); }
+    showToast('Key copied to clipboard');
+}
+
+function copyGenerated() {
+    const key = document.getElementById('newKeyValue').textContent;
+    navigator.clipboard.writeText(key);
+    showToast('Key copied to clipboard');
+}
+
+if (session) loadDashboard(); else show('loginView');
+document.getElementById('password').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+</script>
+</body>
+</html>

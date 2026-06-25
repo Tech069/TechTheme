@@ -1,0 +1,1 @@
+<?php\n\nnamespace Pterodactyl\\Observers\\DGEN;\n\nuse Illuminate\Support\Facades\Log;\n\nclass UserIntegrationObserver\n{\n    public function __construct()\n    {\n        // VexyThemes - TODO: implement\n    }\n}\n

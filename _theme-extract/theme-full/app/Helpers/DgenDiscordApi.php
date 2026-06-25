@@ -1,0 +1,1 @@
+<?php\n\nnamespace Pterodactyl\\Helpers;\n\nuse Illuminate\Support\Facades\Log;\n\nclass DgenDiscordApi\n{\n    public function __construct()\n    {\n        // VexyThemes - TODO: implement\n    }\n}\n

@@ -1,0 +1,126 @@
+{
+    "name": "pterodactyl/panel",
+    "description": "The free, open-source game management panel. Supporting Minecraft, Spigot, BungeeCord, and SRCDS servers.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthew Penner",
+            "email": "matthew@pterodactyl.io",
+            "homepage": "https://github.com/matthewpi",
+            "role": "Lead Developer"
+        },
+        {
+            "name": "Dane Everitt",
+            "email": "dane@daneeveritt.com",
+            "homepage": "https://github.com/DaneEveritt",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2 || ^8.3 || ^8.4",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "ext-posix": "*",
+        "ext-zip": "*",
+        "aws/aws-sdk-php": "*",
+        "guzzlehttp/guzzle": "*",
+        "hashids/hashids": "*",
+        "laracasts/utilities": "*",
+        "laragear/webauthn": "*",
+        "laravel/framework": "*",
+        "laravel/helpers": "*",
+        "laravel/octane": "^2.17",
+        "laravel/sanctum": "*",
+        "laravel/horizon": "^5.45",
+        "laravel/socialite": "*",
+        "laravel/tinker": "*",
+        "laravel/ui": "*",
+        "lcobucci/jwt": "*",
+        "league/flysystem-aws-s3-v3": "*",
+        "league/flysystem-memory": "*",
+        "matriphe/iso-639": "*",
+        "phpseclib/phpseclib": "*",
+        "pragmarx/google2fa": "*",
+        "predis/predis": "*",
+        "prologue/alerts": "*",
+        "psr/cache": "*",
+        "s1lentium/iptools": "*",
+        "socialiteproviders/whmcs": "*",
+        "spatie/laravel-fractal": "*",
+        "spatie/laravel-query-builder": "*",
+        "spiral/roadrunner": "^2025.1",
+        "spiral/roadrunner-cli": "^2.6.0",
+        "spiral/roadrunner-http": "^3.3.0",
+        "staudenmeir/belongs-to-through": "*",
+        "symfony/http-client": "*",
+        "symfony/mailgun-mailer": "*",
+        "symfony/postmark-mailer": "*",
+        "symfony/yaml": "*",
+        "team-reflex/discord-php": "*",
+        "webmozart/assert": "*"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "*",
+        "fakerphp/faker": "*",
+        "friendsofphp/php-cs-fixer": "*",
+        "itsgoingd/clockwork": "*",
+        "larastan/larastan": "*",
+        "mockery/mockery": "*",
+        "nunomaduro/collision": "*",
+        "phpstan/phpstan": "*",
+        "phpstan/phpstan-webmozart-assert": "*",
+        "phpunit/phpunit": "*",
+        "spatie/laravel-ignition": "*"
+    },
+    "autoload": {
+        "files": [
+            "app/helpers.php"
+        ],
+        "psr-4": {
+            "Pterodactyl\\": "app/",
+            "Database\\Factories\\": "database/Factories/",
+            "Database\\Seeders\\": "database/Seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pterodactyl\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "cs:fix": "php-cs-fixer fix",
+        "cs:check": "php-cs-fixer fix --dry-run --diff --verbose",
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi || true"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "platform": {
+            "php": "8.4.0"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+                "laravel/horizon",
+                "laravel/octane"
+            ]
+        }
+    }
+}

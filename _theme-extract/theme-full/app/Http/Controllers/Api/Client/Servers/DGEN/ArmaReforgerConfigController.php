@@ -1,0 +1,1 @@
+<?php\n\nnamespace Pterodactyl\\Http\\Controllers\\Api\\Client\\Servers\\DGEN;\n\nuse Illuminate\Support\Facades\Log;\n\nclass ArmaReforgerConfigController extends Pterodactyl\\Http\\Controllers\\Controller\n{\n    public function __construct()\n    {\n        // VexyThemes - TODO: implement\n    }\n}\n

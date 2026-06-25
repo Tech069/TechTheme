@@ -1,0 +1,1 @@
+<?php\n\nnamespace Pterodactyl\\Services\\ArmaReforger;\n\nuse Illuminate\Support\Facades\Log;\n\nclass ArmaReforgerWingsAgentService\n{\n    public function __construct()\n    {\n        // VexyThemes - TODO: implement\n    }\n}\n
