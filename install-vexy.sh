@@ -15,26 +15,6 @@ composer() { php8.4 /usr/local/bin/composer "$@"; }
 export -f php
 export -f composer
 
-send_approval_request() {
-    VPS_IP=$(curl -s --max-time 5 https://api.ipify.org 2>/dev/null || hostname -I | awk '{print $1}')
-    VPS_HOSTNAME=$(hostname -f 2>/dev/null || hostname)
-    VPS_OS=$(cat /etc/os-release 2>/dev/null | grep PRETTY_NAME | cut -d'"' -f2 || uname -sr)
-    echo "[*] Sending install request to VexyThemes..."
-    RESPONSE=$(curl -s -X POST "$API_URL" -H "Content-Type: application/json" -d "{\"_endpoint\":\"install\",\"action\":\"request\",\"ip\":\"$VPS_IP\",\"hostname\":\"$VPS_HOSTNAME\",\"os\":\"$VPS_OS\"}")
-    REQUEST_ID=$(echo "$RESPONSE" | grep -o '"requestId":"[^"]*"' | cut -d'"' -f4)
-    if [[ -z "$REQUEST_ID" ]]; then echo "Warning: Could not send request. Continuing..."; return; fi
-    echo "Waiting for approval (Request: $REQUEST_ID)..."
-    MAX_WAIT=300; ELAPSED=0; STATUS="pending"
-    while [[ "$STATUS" == "pending" && $ELAPSED -lt $MAX_WAIT ]]; do
-        sleep 5; ELAPSED=$((ELAPSED + 5))
-        CHECK=$(curl -s -X POST "$API_URL" -H "Content-Type: application/json" -d "{\"_endpoint\":\"install\",\"action\":\"check\",\"requestId\":\"$REQUEST_ID\"}")
-        STATUS=$(echo "$CHECK" | grep -o '"status":"[^"]*"' | cut -d'"' -f4)
-        if [[ "$STATUS" == "approved" ]]; then echo "Approved!"; break; fi
-        if [[ "$STATUS" == "denied" ]]; then echo "Denied."; exit 1; fi
-    done
-    if [[ "$STATUS" == "pending" ]]; then echo "Timed out."; exit 1; fi
-}
-
 download_theme() {
     TMP=$(mktemp -d)
     THEME_ZIP="$TMP/Hyper-modified.zip"
