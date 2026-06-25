@@ -754,8 +754,6 @@ do_install() {
     echo "================================="
     echo ""
 
-    send_approval_request
-
     echo ""
     echo "Starting installation..."
     echo ""
